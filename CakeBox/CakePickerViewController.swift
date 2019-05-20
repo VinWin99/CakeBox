@@ -15,7 +15,7 @@ class CakePickerViewController: UIViewController {
     
     var cakeTitle: UILabel = UILabel()
     let cakeImageView = UIImageView()
-    let cakeDescription = UITextView()
+    let cakeDescription = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,8 +31,7 @@ class CakePickerViewController: UIViewController {
                                      width: self.view.bounds.width - 32,
                                      height: 233)
         
-        
-        cakeDescription.isEditable = false
+        cakeDescription.numberOfLines = 0
         cakeDescription.font = UIFont(name: "Avenir",
                                       size: 16)
         cakeDescription.frame = CGRect.init(x: 16,
@@ -64,7 +63,6 @@ class CakePickerViewController: UIViewController {
             if let cakeFromPlist = NSArray(contentsOf: URL) as? [[String]] {
                 cakes = cakeFromPlist
             }
-
         }
         
         return cakes
@@ -83,15 +81,12 @@ class CakePickerViewController: UIViewController {
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("touches ended")
-
         self.present(RecipieViewController(cakeName: db[pageIndex][0],
                                            imageName: db[pageIndex][1],
                                            ingredients: db[pageIndex][3],
                                            recipie: db[pageIndex][4]),
                      animated: true,
                      completion: nil)
-        //self.dismiss(animated: <#T##Bool#>, completion: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>)
     }
  
     @objc
