@@ -30,9 +30,11 @@ class RecipieViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
         
+        let topInset: CGFloat = UIApplication.shared.statusBarFrame.size.height
+        
         let doneButton = UIButton(type: .system)
         doneButton.frame = CGRect(x: 16,
-                                  y: 16,
+                                  y: topInset,
                                   width: 0,
                                   height: 0)
         doneButton.setTitle("Done",
@@ -44,9 +46,9 @@ class RecipieViewController: UIViewController {
         
         var runningHeight: CGFloat = 0
         let scrollView = UIScrollView(frame: CGRect(x: 0,
-                                                    y: 32,
+                                                    y: doneButton.frame.height + topInset,
                                                     width: self.view.bounds.width,
-                                                    height: self.view.bounds.height))
+                                                    height: self.view.bounds.height - doneButton.frame.height - topInset))
         
         let cakeTitle = UILabel()
         cakeTitle.frame = CGRect(x: 16,
@@ -85,7 +87,7 @@ class RecipieViewController: UIViewController {
         recipieView.numberOfLines = 0
         recipieView.text = recipie
         recipieView.sizeToFit()
-        runningHeight += recipieView.frame.height + 32
+        runningHeight += recipieView.frame.height
         
         scrollView.addSubview(cakeTitle)
         scrollView.addSubview(cakeImageView)
