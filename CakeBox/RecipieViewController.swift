@@ -18,8 +18,8 @@ class RecipieViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
         self.cakeName = cakeName
         self.image = UIImage(named: imageName)!
-        self.ingredients = ingredients
-        self.recipie = recipie
+        self.ingredients = ingredients.replacingOccurrences(of: "\\n", with: "\n")
+        self.recipie = recipie.replacingOccurrences(of: "\\n", with: "\n")
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -30,41 +30,76 @@ class RecipieViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
         
-        let scrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height))
+        let doneButton = UIButton(type: .system)
+        doneButton.frame = CGRect(x: 16,
+                                  y: 16,
+                                  width: 0,
+                                  height: 0)
+        doneButton.setTitle("Done",
+                            for: .normal)
+        doneButton.addTarget(self,
+                             action: #selector(performDismiss),
+                             for: .touchUpInside)
+        doneButton.sizeToFit()
+        
+        var runningHeight: CGFloat = 0
+        let scrollView = UIScrollView(frame: CGRect(x: 0,
+                                                    y: 32,
+                                                    width: self.view.bounds.width,
+                                                    height: self.view.bounds.height))
         
         let cakeTitle = UILabel()
+        cakeTitle.frame = CGRect(x: 16,
+                                 y: runningHeight,
+                                 width: self.view.bounds.width - 32,
+                                 height: 0)
+        cakeTitle.numberOfLines = 0
         cakeTitle.text = cakeName
-        cakeTitle.font = UIFont(name: "Avenir", size: 24)
+        cakeTitle.font = UIFont(name: "Avenir",
+                                size: 24)
         cakeTitle.sizeToFit()
-        cakeTitle.center = CGPoint(x: self.view.center.x,
-                               y: 64)
+        runningHeight += cakeTitle.frame.height
         
         let cakeImageView = UIImageView(image: image)
         cakeImageView.frame = CGRect(x: 16,
-                                     y: 128,
+                                     y: runningHeight,
                                      width: self.view.bounds.width - 32,
                                      height: 233)
+        runningHeight += cakeImageView.frame.height
         
-        let ingredientView = UITextView()
+        let ingredientView = UILabel()
         ingredientView.frame = CGRect.init(x: 16,
-                                           y: 375,
+                                           y: runningHeight,
                                            width: self.view.bounds.width - 32,
-                                           height: 100)
+                                           height: 0)
+        ingredientView.numberOfLines = 0
         ingredientView.text = ingredients
+        ingredientView.sizeToFit()
+        runningHeight += ingredientView.frame.height + 32
         
-        let recipieView = UITextView()
+        let recipieView = UILabel()
         recipieView.frame = CGRect.init(x: 16,
-                                           y: 500,
-                                           width: self.view.bounds.width - 32,
-                                           height: 100)
+                                        y: runningHeight,
+                                        width: self.view.bounds.width - 32,
+                                        height: 0)
+        recipieView.numberOfLines = 0
         recipieView.text = recipie
+        recipieView.sizeToFit()
+        runningHeight += recipieView.frame.height + 32
         
         scrollView.addSubview(cakeTitle)
         scrollView.addSubview(cakeImageView)
         scrollView.addSubview(ingredientView)
         scrollView.addSubview(recipieView)
-        self.view.addSubview(scrollView)
         
+        scrollView.contentSize = CGSize(width: self.view.bounds.width,
+                                        height: runningHeight)
+        self.view.addSubview(scrollView)
+        self.view.addSubview(doneButton)
     }
     
+    @objc
+    func performDismiss() {
+        self.dismiss(animated: true, completion: nil)
+    }
 }
