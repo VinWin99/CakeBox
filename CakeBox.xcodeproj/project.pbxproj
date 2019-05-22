@@ -12,6 +12,7 @@
 		0077F008228A5C8A0088C899 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0077F007228A5C8A0088C899 /* Assets.xcassets */; };
 		0077F00B228A5C8A0088C899 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0077F009228A5C8A0088C899 /* LaunchScreen.storyboard */; };
 		0077F013228A7A9D0088C899 /* RecipieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0077F012228A7A9D0088C899 /* RecipieViewController.swift */; };
+		3C5F3AF22295236C001EB2A9 /* SupportLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5F3AF12295236C001EB2A9 /* SupportLogic.swift */; };
 		3CA3FA2A228A88A700917752 /* Cakes.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3CA3FA29228A88A700917752 /* Cakes.plist */; };
 /* End PBXBuildFile section */
 
@@ -23,6 +24,7 @@
 		0077F00A228A5C8A0088C899 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0077F00C228A5C8A0088C899 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0077F012228A7A9D0088C899 /* RecipieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipieViewController.swift; sourceTree = "<group>"; };
+		3C5F3AF12295236C001EB2A9 /* SupportLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportLogic.swift; sourceTree = "<group>"; };
 		3CA3FA29228A88A700917752 /* Cakes.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Cakes.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -59,6 +61,7 @@
 				0077F000228A5C890088C899 /* AppDelegate.swift */,
 				0077F002228A5C890088C899 /* CakePickerViewController.swift */,
 				0077F012228A7A9D0088C899 /* RecipieViewController.swift */,
+				3C5F3AF12295236C001EB2A9 /* SupportLogic.swift */,
 				0077F007228A5C8A0088C899 /* Assets.xcassets */,
 				0077F009228A5C8A0088C899 /* LaunchScreen.storyboard */,
 				3CA3FA29228A88A700917752 /* Cakes.plist */,
@@ -138,6 +141,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C5F3AF22295236C001EB2A9 /* SupportLogic.swift in Sources */,
 				0077F003228A5C890088C899 /* CakePickerViewController.swift in Sources */,
 				0077F001228A5C890088C899 /* AppDelegate.swift in Sources */,
 				0077F013228A7A9D0088C899 /* RecipieViewController.swift in Sources */,

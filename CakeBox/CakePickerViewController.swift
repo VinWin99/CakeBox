@@ -9,13 +9,14 @@
 import UIKit
 
 class CakePickerViewController: UIViewController {
+    let supportLogic = SupportLogic.logicInstance
     
     private var db: [[String]] = []
     private var pageIndex: Int = 0
     
-    var cakeTitle: UILabel = UILabel()
-    let cakeImageView = UIImageView()
-    let cakeDescription = UILabel()
+    private var cakeTitle: UILabel = UILabel()
+    private var cakeImageView: UIImageView = UIImageView()
+    private var cakeDescription: UILabel = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,13 +24,8 @@ class CakePickerViewController: UIViewController {
         
         db = readPropertyList(bundleName: "Cakes")
         
-        cakeTitle.font = UIFont(name: "Avenir",
-                                size: 24)
-        
-        cakeImageView.frame = CGRect(x: 16,
-                                     y: 128,
-                                     width: self.view.bounds.width - 32,
-                                     height: 233)
+        self.cakeTitle.font = UIFont(name: "Avenir",
+                                     size: 24)
         
         cakeDescription.numberOfLines = 0
         cakeDescription.font = UIFont(name: "Avenir",
@@ -69,15 +65,29 @@ class CakePickerViewController: UIViewController {
     }
     
     func getPageDetails() {
+        var runningHeight: CGFloat = 0
+        
         cakeTitle.text = db[pageIndex][0]
         cakeTitle.sizeToFit()
         cakeTitle.center = CGPoint(x: self.view.center.x,
                                    y: 64)
+        runningHeight += cakeTitle.frame.origin.y + cakeTitle.frame.height
         
-        cakeImageView.image = UIImage(named: db[pageIndex][1])!
+        if let image = UIImage(named: db[pageIndex][1]) {
+            cakeImageView.image = image
+            let width = self.view.bounds.width - 32
+            let height = image.size.height * width / image.size.width
+            cakeImageView.frame = CGRect(x: 16,
+                                         y: runningHeight,
+                                         width: width,
+                                         height: height)
+            runningHeight += cakeImageView.frame.height
+        }
         
         cakeDescription.text = db[pageIndex][2]
         cakeDescription.sizeToFit()
+        cakeDescription.frame.origin = CGPoint(x: 16,
+                                               y: runningHeight)
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {

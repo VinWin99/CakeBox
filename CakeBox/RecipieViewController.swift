@@ -9,6 +9,8 @@
 import UIKit
 
 class RecipieViewController: UIViewController {
+    let supportLogic = SupportLogic.logicInstance
+    
     var cakeName: String!
     var image: UIImage!
     var ingredients: String!
@@ -62,11 +64,11 @@ class RecipieViewController: UIViewController {
         cakeTitle.sizeToFit()
         runningHeight += cakeTitle.frame.height
         
-        let cakeImageView = UIImageView(image: image)
-        cakeImageView.frame = CGRect(x: 16,
-                                     y: runningHeight,
-                                     width: self.view.bounds.width - 32,
-                                     height: 233)
+        let cakeImageViewWidth = scrollView.frame.width - 32
+        let cakeImageView = supportLogic.getImageView(image: image,
+                                                      origin: CGPoint(x: 16,
+                                                                      y: runningHeight),
+                                                      boundingDimension: cakeImageViewWidth)
         runningHeight += cakeImageView.frame.height
         
         let ingredientView = UILabel()
