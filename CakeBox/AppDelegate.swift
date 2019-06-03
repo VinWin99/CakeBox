@@ -15,9 +15,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        let nav = UINavigationController(rootViewController: CakePickerViewController())
+        nav.setNavigationBarHidden(true,
+                                  animated: false)
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window?.makeKeyAndVisible()
-        self.window?.rootViewController = CakePickerViewController()
+        self.window?.rootViewController = nav
         return true
     }
 

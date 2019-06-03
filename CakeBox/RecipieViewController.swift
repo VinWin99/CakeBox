@@ -9,6 +9,8 @@
 import UIKit
 
 class RecipieViewController: UIViewController {
+    let supportLogic = SupportLogic.logicInstance
+    
     var cakeName: String!
     var image: UIImage!
     var ingredients: String!
@@ -30,9 +32,11 @@ class RecipieViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
         
+        let topInset: CGFloat = UIApplication.shared.statusBarFrame.size.height
+        
         let doneButton = UIButton(type: .system)
         doneButton.frame = CGRect(x: 16,
-                                  y: 16,
+                                  y: topInset,
                                   width: 0,
                                   height: 0)
         doneButton.setTitle("Done",
@@ -44,9 +48,9 @@ class RecipieViewController: UIViewController {
         
         var runningHeight: CGFloat = 0
         let scrollView = UIScrollView(frame: CGRect(x: 0,
-                                                    y: 32,
+                                                    y: doneButton.frame.height + topInset,
                                                     width: self.view.bounds.width,
-                                                    height: self.view.bounds.height))
+                                                    height: self.view.bounds.height - doneButton.frame.height - topInset))
         
         let cakeTitle = UILabel()
         cakeTitle.frame = CGRect(x: 16,
@@ -60,11 +64,11 @@ class RecipieViewController: UIViewController {
         cakeTitle.sizeToFit()
         runningHeight += cakeTitle.frame.height
         
-        let cakeImageView = UIImageView(image: image)
-        cakeImageView.frame = CGRect(x: 16,
-                                     y: runningHeight,
-                                     width: self.view.bounds.width - 32,
-                                     height: 233)
+        let cakeImageViewWidth = scrollView.frame.width - 32
+        let cakeImageView = supportLogic.getImageView(image: image,
+                                                      origin: CGPoint(x: 16,
+                                                                      y: runningHeight),
+                                                      boundingDimension: cakeImageViewWidth)
         runningHeight += cakeImageView.frame.height
         
         let ingredientView = UILabel()
@@ -85,7 +89,7 @@ class RecipieViewController: UIViewController {
         recipieView.numberOfLines = 0
         recipieView.text = recipie
         recipieView.sizeToFit()
-        runningHeight += recipieView.frame.height + 32
+        runningHeight += recipieView.frame.height
         
         scrollView.addSubview(cakeTitle)
         scrollView.addSubview(cakeImageView)
@@ -100,6 +104,6 @@ class RecipieViewController: UIViewController {
     
     @objc
     func performDismiss() {
-        self.dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
 }
