@@ -91,12 +91,11 @@ class CakePickerViewController: UIViewController {
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.present(RecipieViewController(cakeName: db[pageIndex][0],
-                                           imageName: db[pageIndex][1],
-                                           ingredients: db[pageIndex][3],
-                                           recipie: db[pageIndex][4]),
-                     animated: true,
-                     completion: nil)
+        self.navigationController?.pushViewController(RecipieViewController(cakeName: db[pageIndex][0],
+                                                                            imageName: db[pageIndex][1],
+                                                                            ingredients: db[pageIndex][3],
+                                                                            recipie: db[pageIndex][4]),
+                                                      animated: true)
     }
  
     @objc
